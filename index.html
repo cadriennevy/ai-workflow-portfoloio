@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camille Adrienne Villaprudente — AI Systems & Workflow Builder</title>
+  <style>
+    :root {
+      --bg: #07090e;
+      --surface: #0f131d;
+      --surface-hover: #151b29;
+      --border: #1f2b40;
+      --border-accent: #38bdf8;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.12);
+      --green: #34d399;
+      --green-soft: rgba(52, 211, 153, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    /* Header / Hero */
+    header {
+      padding: 3rem 0 2.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 660px;
+      margin-bottom: 1.75rem;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.75rem 1.35rem;
+      border-radius: 12px;
+      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #06101c;
+    }
+
+    .btn-primary:hover {
+      background: #7dd3fc;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-1px);
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 3.5rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* Project Cards */
+    .projects-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.75rem;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: var(--border-accent);
+      background: var(--surface-hover);
+    }
+
+    .card-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      color: var(--text);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      color: var(--muted);
+      background: rgba(148, 163, 184, 0.1);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    .flow-bar {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.82rem;
+      color: var(--accent);
+      background: rgba(7, 9, 14, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.7rem 0.95rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+
+    .card-details {
+      display: grid;
+      gap: 0.65rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .card-details strong {
+      color: var(--text);
+    }
+
+    .impact-pill {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--green);
+      background: var(--green-soft);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      padding: 0.35rem 0.85rem;
+      border-radius: 10px;
+    }
+
+    /* Stack Grid */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .stack-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem;
+    }
+
+    .stack-box h3 {
+      font-size: 0.95rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .stack-box p {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* Footer / Contact */
+    footer {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    footer h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    footer p {
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">AI Systems &amp; Workflow Builder</span>
+      <h1>Practical AI workflows that eliminate repetitive business admin.</h1>
+      <p class="subtitle">
+        Hi, I'm <strong>Camille Adrienne Villaprudente</strong>. I build lightweight, reliable automations using free and low-cost tools—helping small businesses save hours on payroll, invoicing, and customer support.
+      </p>
+      <div class="cta-group">
+        <a href="#projects" class="btn btn-primary">View Systems</a>
+        <a href="mailto:camilleadriennev@gmail.com" class="btn btn-secondary">Get in Touch</a>
+      </div>
+    </header>
+
+    <section id="projects">
+      <h2>Featured Systems</h2>
+      <div class="projects-grid">
+
+        <!-- Project 1 -->
+        <article class="card">
+          <div class="card-top">
+            <h3>1. Automated Payslip &amp; Payroll Ledger System</h3>
+            <div class="tags">
+              <span class="tag">Google Sheets</span>
+              <span class="tag">Apps Script</span>
+              <span class="tag">PDF Automation</span>
+            </div>
+          </div>
+          <div class="flow-bar">
+            Employee &amp; Advance Ledger &rarr; Automated Proration &rarr; Custom Menu &rarr; 1-Click PDF Export
+          </div>
+          <div class="card-details">
+            <p><strong>The Bottleneck:</strong> Calculating prorated pay, tracking cash advances, and formatting individual payslips manually took hours every pay cycle.</p>
+            <p><strong>The Solution:</strong> Built an integrated spreadsheet system with an employee database, cash-advance ledger, calendar date-pickers, and a custom script menu that exports clean PDFs in one click.</p>
+          </div>
+          <span class="impact-pill">Impact: Hours of manual payroll reduced to 1 click ($0/mo cost)</span>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="card">
+          <div class="card-top">
+            <h3>2. Smart Invoicing &amp; Tax Allowance Tracker</h3>
+            <div class="tags">
+              <span class="tag">Google Sheets</span>
+              <span class="tag">Apps Script</span>
+              <span class="tag">Data Validation</span>
+            </div>
+          </div>
+          <div class="flow-bar">
+            Client Dropdowns &rarr; Taxable vs. Non-Taxable Logic &rarr; Invoice &rarr; Auto-Archive Log
+          </div>
+          <div class="card-details">
+            <p><strong>The Bottleneck:</strong> Separating taxable charges from non-taxable reimbursements and manually archiving invoices caused frequent bookkeeping errors.</p>
+            <p><strong>The Solution:</strong> Engineered a dynamic invoice generator using lookup tables, automatic tax/allowance calculations, and automated record archiving.</p>
+          </div>
+          <span class="impact-pill">Impact: Zero manual sorting errors &amp; audit-ready archive</span>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="card">
+          <div class="card-top">
+            <h3>3. Human-in-the-Loop Support Triage Assistant</h3>
+            <div class="tags">
+              <span class="tag">Make.com</span>
+              <span class="tag">Gmail</span>
+              <span class="tag">AI Prompt System</span>
+            </div>
+          </div>
+          <div class="flow-bar">
+            Incoming Ticket &rarr; AI Triage &amp; Policy Check &rarr; Gmail Draft &rarr; Human Approval
+          </div>
+          <div class="card-details">
+            <p><strong>The Bottleneck:</strong> Support teams spent hours writing repetitive responses for damaged items, order tracking, returns, and product dimensions.</p>
+            <p><strong>The Solution:</strong> Created a structured AI prompt and workflow that classifies incoming inquiries, checks company policies, and saves a ready-to-review draft reply for a human agent.</p>
+          </div>
+          <span class="impact-pill">Impact: 50%+ faster ticket drafting with 100% human oversight</span>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="stack">
+      <h2>Tools &amp; Capabilities</h2>
+      <div class="stack-grid">
+        <div class="stack-box">
+          <h3>Automation &amp; Scripts</h3>
+          <p>Google Apps Script, Make.com, Google Workspace (Sheets, Docs, Forms, Gmail)</p>
+        </div>
+        <div class="stack-box">
+          <h3>AI &amp; Prompt Systems</h3>
+          <p>Structured Prompting, Human-in-the-Loop Workflows, Output Quality Testing</p>
+        </div>
+        <div class="stack-box">
+          <h3>Business Operations</h3>
+          <p>Customer Support Triage, Payroll &amp; Invoicing Admin, SOP Documentation</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <h2>Have a repetitive process you want to simplify?</h2>
+      <p>Send me a quick note about what is slowing your team down—no complex tech required.</p>
+      <div class="cta-group" style="justify-content: center;">
+        <a href="mailto:camilleadriennev@gmail.com" class="btn btn-primary">Email Me</a>
+        <a href="https://linkedin.com" target="_blank" class="btn btn-secondary">LinkedIn</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
